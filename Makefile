@@ -9,8 +9,8 @@ SOURCES=snowman.cpp
 run: test
 	./$^
 	
-mains: main.o
-	$(CXX) $(CXXFLAGS) -o mains main.o 
+main: main.o
+	$(CXX) $(CXXFLAGS) -o main main.o 
 
 main.o: main.cpp snowman.hpp
 	$(CC) $(FLAGS) -c main.cpp
