@@ -9,11 +9,14 @@ SOURCES=snowman.cpp
 run: test
 	./$^
 	
-main: main.o
-	$(CXX) $(CXXFLAGS) -o main main.o 
+main: main.o snowman.o
+	$(CXX) $(CXXFLAGS) -o main main.o snowman.o
 
-main.o: main.cpp snowman.hpp
+main.o: main.cpp 
 	$(CC) $(FLAGS) -c main.cpp
+
+snowman.o: snowman.cpp
+	$(CC) $(FLAGS) -c snowman.cpp
 	
 test: TestRunner.o StudentTest1.o StudentTest2.o StudentTest3.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
@@ -34,5 +37,5 @@ tidy:
 	clang-tidy $(SOURCES) -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-* --warnings-as-errors=* --
 
 clean:
-	rm -f *.o test
+	rm -f *.o test main
 	rm -f StudentTest*.cpp
